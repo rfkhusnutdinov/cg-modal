@@ -1,16 +1,21 @@
 export default class CgModal {
   constructor(options) {
     const deafultOptions = {
-      selector: ".js-modal", // Селектор модального окна (можно сменить, но атрибут должен остаться для связи кнопки и модального окна) [default = [data-modal]]
-      activeClass: "active", // Класс активности модального окна [default = active]
-      openButton: ".js-open-modal-btn", // Селектор кнопки открывающей модальное окно (можно сменить, но у кнопки должен остаться атрибут, чтобы соединять кнопку с нужным модальным окном) [default = [data-open-modal]]
-      closeButton: ".js-close-modal-btn", // Селектор кнопки закрытия модального окна [default = [data-modal-close]]
-      contentClass: "modal__content", // Класс обертки содержимого модального окна [default = modal_content]
-      effect: null, // Эффект появления модального окна (fade, transformBottom, transformLeft, transformTop, transformRight, scaleCenter) [default = null]
-      speed: 300, // Скорость анимации (в мс) [default = 300]
-      position: "center", // Расположение окна (center, left, right) [default - center]
+      selector: ".js-modal", // Selector of modals [default = .js-modal]
+      openButton: ".js-open-modal-btn", // Selector of open button [default = .js-open-modal-btn]
+      closeButton: ".js-close-modal-btn", // Selector of close button [default = .js-close-modal-btn]
+      contentClass: "js-modal-content", // Class of content wrapper [default = js-modal-content]
+      effect: null, // Effect of opening or closing modals (fade, transformBottom, transformLeft, transformTop, transformRight, scaleCenter) [default = null]
+      speed: 300, // Transition (ms) [default = 300]
+      position: "center", // Position of modal (center, left, right) [default - center]
+      beforeOpen: () => {}, // Event before open modal
+      afterOpen: () => {}, // Event after open modal
+      beforeClose: () => {}, // Event before close modal
+      afterClose: () => {}, // Event after close modal
+      onOpenBtnClick: () => {}, // Event at moment of click on open button
     };
 
+    this._activeClass = "active";
     this.options = Object.assign(deafultOptions, options);
     this.modals = null;
     this.documentBody = document.body;
@@ -25,27 +30,36 @@ export default class CgModal {
       console.error(`Не найден элемент с селектором "${this.options.selector}"`);
     } else {
       this.modals.forEach((modal) => {
+        // Add class of effect
         if (this.hasEffect(this.options.effect)) {
           modal.classList.add(`${this.options.effect}`);
         }
 
+        // Add tech class for modal, need for correct work for animations effect, positions, etc.
+        !modal.classList.contains("js-modal") ? modal.classList.add("js-modal") : "";
+
+        // Add class of modal position
         modal.classList.add(`${this.options.position}`);
 
-        if (this.options.speed && this.isNumeric(this.options.speed)) {
+        // Set speed of animations
+        if (this.options.speed && this._isNumeric(this.options.speed)) {
           modal.style.setProperty("--speed", parseFloat(this.options.speed / 1000) + "s");
         }
       });
 
-      this.eventsHandler();
+      this._eventsHandler();
     }
   }
 
-  eventsHandler() {
+  _eventsHandler() {
+    // Click event for open modal buttons
     const openModalButtons = document.querySelectorAll(`${this.options.openButton}`);
 
     if (openModalButtons) {
       openModalButtons.forEach((btn) => {
         btn.addEventListener("click", (e) => {
+          this.options.onOpenBtnClick();
+
           e.stopPropagation();
           this.open(`${e.currentTarget.dataset.openModal}`);
         });
@@ -55,72 +69,95 @@ export default class CgModal {
     }
 
     this.modals.forEach((modal) => {
+      // Click event for close modal button
       const closeModalButtons = modal.querySelectorAll(`${this.options.closeButton}`);
 
       if (closeModalButtons) {
         closeModalButtons.forEach((btn) => {
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            const modalCurrent = e.currentTarget.closest(`${this.options.selector}`);
-
-            if (modalCurrent) {
-              this.close(modalCurrent);
-            } else {
-              console.error(`Не найден элемент с data атрибутом "${this.options.selector}"`);
-            }
+            this.close(modal);
           });
         });
       }
 
-      const modalWrapper = modal.querySelector(`.${this.options.contentClass}`);
+      // Stop propagation for modal content wrapper, for not closing active modal by clicking on this wrapper
+      const modalContent = modal.querySelector(`.${this.options.contentClass}`);
 
-      if (modalWrapper) {
-        modalWrapper.addEventListener("click", (e) => {
+      if (modalContent) {
+        !modalContent.classList.contains("js-modal-content") ? modalContent.classList.add("js-modal-content") : "";
+
+        modalContent.addEventListener("click", (e) => {
           e.stopPropagation();
         });
       } else {
-        console.error(`Не найден элемент с классом "${this.options.contentClass}"`);
+        console.error(`Не найден элемент ".${this.options.contentClass}"`);
       }
     });
 
-    this.bodyElement.addEventListener("click", () => {
-      if (document.querySelector(`${this.options.selector}.${this.options.activeClass}`)) {
-        document
-          .querySelector(`${this.options.selector}.${this.options.activeClass}`)
-          .classList.remove(`${this.options.activeClass}`);
-        this.bodyElement.style.overflow = "";
+    // Click event for document.body => close active modal
+    this.documentBody.addEventListener("click", () => {
+      if (this.hasActiveModal() !== false) {
+        this.closeActive();
       }
     });
+
+    // Press "Escape" on keyboard to close modal
+    document.onkeydown = (e) => {
+      if (this.hasActiveModal() !== false) {
+        e = e || window.event;
+        if (e.keyCode == 27) {
+          this.closeActive();
+        }
+      }
+    };
   }
 
-  open(modalData) {
-    const modal = document.querySelector(`[data-modal=${modalData}]`);
+  // Open modal by data-attribute (data-modal)
+  open(modalId) {
+    this.options.beforeOpen();
+
+    const modal = document.querySelector(`[data-modal=${modalId}]`);
 
     if (modal) {
-      modal.classList.add(`${this.options.activeClass}`);
-      this.bodyElement.style.overflow = "hidden";
+      modal.classList.add(`${this._activeClass}`);
+      this.documentBody.style.overflow = "hidden";
+
+      this.options.afterOpen();
     } else {
-      console.error(`Не найдено соответствующее окно с атрибутом равным ${modalData}`);
+      console.error(`Не найдено соответствующее окно с атрибутом равным ${modalId}`);
     }
   }
 
+  // Close modal by Node Element
   close(modal) {
-    modal.classList.remove(`${this.options.activeClass}`);
-    this.bodyElement.style.overflow = "";
+    this.options.beforeClose();
+
+    modal.classList.remove(`${this._activeClass}`);
+    this.documentBody.style.overflow = "";
+
+    this.options.afterClose();
   }
 
-  closeActiveModal() {
-    const modalActive = document.querySelector(`${this.options.selector}.${this.options.activeClass}`);
-
-    if (modalActive) {
-      modalActive.classList.remove(`${this.options.activeClass}`);
-    }
+  // Close active modal
+  closeActive() {
+    const hasActiveModal = this.hasActiveModal();
+    hasActiveModal !== false ? this.close(hasActiveModal) : "";
   }
 
-  isNumeric(number) {
+  // Check if there is active modal window
+  hasActiveModal() {
+    return document.querySelector(`${this.options.selector}.${this._activeClass}`)
+      ? document.querySelector(`${this.options.selector}.${this._activeClass}`)
+      : false;
+  }
+
+  // function helper
+  _isNumeric(number) {
     return !isNaN(parseFloat(number)) && isFinite(number);
   }
 
+  // Check if options have correct effect property
   hasEffect(string) {
     const effects = ["fade", "transformLeft", "transformRight", "transformTop", "transformBottom", "scaleCenter"];
 

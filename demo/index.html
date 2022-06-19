@@ -7,10 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CgModal</title>
   <link rel="stylesheet" href="../dist/cg-modal.min.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+  <button class="js-open-modal-btn" type="button" data-open-modal="new">Open</button>
 
+  <div class="js-modal" data-modal="new">
+    <div class="js-modal-wrapper">
+      <div class="js-modal-content">
+        <button class="js-close-modal-btn" type="button" aria-label="Закрыть модальное окно">Закрыть</button>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium tenetur ab consequatur iusto assumenda
+          doloribus optio quasi accusamus, placeat, dolorum dolore. Officiis aperiam possimus dolore qui obcaecati
+          provident, quibusdam nisi commodi ullam, dicta nam quaerat veritatis iusto ab earum tempore enim, sunt magnam
+          at numquam tempora omnis facere. Qui nostrum ducimus debitis! Aut asperiores nemo obcaecati velit quibusdam
+          sit sapiente soluta accusantium beatae ipsa quae, voluptatem laudantium tempore? Laboriosam iste omnis quas
+          architecto voluptatem voluptatum aliquam, eaque delectus. Sed error quas nostrum reiciendis dolorum minima,
+          eligendi natus eum debitis quod, molestias sunt vel nisi sapiente officiis ducimus repellat doloremque
+          similique?</p>
+      </div>
+    </div>
+  </div>
   <script src="../dist/cg-modal.min.js"></script>
   <script>
     const modals = new CgModal();
