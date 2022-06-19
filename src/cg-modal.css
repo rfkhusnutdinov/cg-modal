@@ -2,6 +2,7 @@
   --speed: 0.3s;
 
   position: fixed;
+  background-color: rgba(34, 60, 80, 0.8);
   top: 0;
   right: 0;
   bottom: 0;
