@@ -1,0 +1,38 @@
+{
+  "name": "cg-modal",
+  "version": "1.0.0",
+  "description": "Simple JS library for modal windows",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rfkhusnutdinov/cg-modal.git"
+  },
+  "keywords": [
+    "modals",
+    "js",
+    "codegamma"
+  ],
+  "author": "Rinat Khusnutdinov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rfkhusnutdinov/cg-modal/issues"
+  },
+  "homepage": "https://github.com/rfkhusnutdinov/cg-modal#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/plugin-transform-object-assign": "^7.16.7",
+    "@babel/preset-env": "^7.18.2",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
