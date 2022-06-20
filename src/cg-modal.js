@@ -8,11 +8,14 @@ export default class CgModal {
       effect: null, // Effect of opening or closing modals (fade, transformBottom, transformLeft, transformTop, transformRight, scaleCenter) [default = null]
       speed: 300, // Transition (ms) [default = 300]
       position: "center", // Position of modal (center, left, right) [default - center]
-      beforeOpen: () => {}, // Event before open modal
-      afterOpen: () => {}, // Event after open modal
-      beforeClose: () => {}, // Event before close modal
-      afterClose: () => {}, // Event after close modal
-      onOpenBtnClick: () => {}, // Event at moment of click on open button
+      on: {
+        beforeOpen: () => {}, // Event before open modal
+        afterOpen: () => {}, // Event after open modal
+        beforeClose: () => {}, // Event before close modal
+        afterClose: () => {}, // Event after close modal
+        openBtnClick: () => {}, // Event at moment of click on open button
+        update: () => {}, // Event at moment of update instance
+      },
     };
 
     this._activeClass = "active";
@@ -58,7 +61,7 @@ export default class CgModal {
     if (openModalButtons) {
       openModalButtons.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-          this.options.onOpenBtnClick();
+          this.options.on.openBtnClick();
 
           e.stopPropagation();
           this.open(`${e.currentTarget.dataset.openModal}`);
@@ -115,7 +118,7 @@ export default class CgModal {
 
   // Open modal by data-attribute (data-modal)
   open(modalId) {
-    this.options.beforeOpen();
+    this.options.on.beforeOpen();
 
     const modal = document.querySelector(`[data-modal=${modalId}]`);
 
@@ -123,7 +126,7 @@ export default class CgModal {
       modal.classList.add(`${this._activeClass}`);
       this.documentBody.style.overflow = "hidden";
 
-      this.options.afterOpen();
+      this.options.on.afterOpen();
     } else {
       console.error(`Не найдено соответствующее окно с атрибутом равным ${modalId}`);
     }
@@ -131,12 +134,12 @@ export default class CgModal {
 
   // Close modal by Node Element
   close(modal) {
-    this.options.beforeClose();
+    this.options.on.beforeClose();
 
     modal.classList.remove(`${this._activeClass}`);
     this.documentBody.style.overflow = "";
 
-    this.options.afterClose();
+    this.options.on.afterClose();
   }
 
   // Close active modal
@@ -152,7 +155,7 @@ export default class CgModal {
       : false;
   }
 
-  // function helper
+  // function helper - check if property is number
   _isNumeric(number) {
     return !isNaN(parseFloat(number)) && isFinite(number);
   }
@@ -165,5 +168,12 @@ export default class CgModal {
       return true;
     }
     return false;
+  }
+
+  // update modals instance
+  update() {
+    this.init();
+
+    this.options.on.update();
   }
 }
