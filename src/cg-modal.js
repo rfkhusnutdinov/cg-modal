@@ -23,7 +23,7 @@ export default class CgModal {
     this._activeClass = "active";
     this.modals = null;
     this.documentBody = document.body;
-    this.options = this.deepMerge(defaultOptions, options);
+    this.options = this._deepMerge(defaultOptions, options);
 
     this.init();
   }
@@ -38,7 +38,7 @@ export default class CgModal {
     } else {
       this.modals.forEach((modal) => {
         // Add class of effect
-        if (this.hasEffect(this.options.effect)) {
+        if (this._hasEffect(this.options.effect)) {
           modal.classList.add(`${this.options.effect}`);
         }
 
@@ -128,14 +128,14 @@ export default class CgModal {
 
     // Click event for document.body => close active modal
     this.documentBody.addEventListener("click", () => {
-      if (this.hasActiveModal() !== false) {
+      if (this._hasActiveModal() !== false) {
         this.closeActive();
       }
     });
 
     // Press "Escape" on keyboard to close modal
     document.onkeydown = (e) => {
-      if (this.hasActiveModal() !== false) {
+      if (this._hasActiveModal() !== false) {
         e = e || window.event;
         if (e.keyCode == 27) {
           this.closeActive();
@@ -174,12 +174,12 @@ export default class CgModal {
 
   // Close active modal
   closeActive() {
-    const hasActiveModal = this.hasActiveModal();
+    const hasActiveModal = this._hasActiveModal();
     hasActiveModal !== false ? this.close(hasActiveModal) : "";
   }
 
   // Check if there is active modal window
-  hasActiveModal() {
+  _hasActiveModal() {
     return document.querySelector(
       `${this.options.selector}.${this._activeClass}`
     )
@@ -192,12 +192,12 @@ export default class CgModal {
     return !isNaN(parseFloat(number)) && isFinite(number);
   }
 
-  deepMerge(target, source) {
+  _deepMerge(target, source) {
     if (!source) return target;
 
     Object.entries(source).forEach(([key, value]) => {
       if (value && typeof value === "object") {
-        this.deepMerge((target[key] = target[key] || {}), value);
+        this._deepMerge((target[key] = target[key] || {}), value);
         return;
       }
       target[key] = value;
@@ -206,7 +206,7 @@ export default class CgModal {
   }
 
   // Check if options have correct effect property
-  hasEffect(string) {
+  _hasEffect(string) {
     const effects = [
       "fade",
       "transformLeft",
