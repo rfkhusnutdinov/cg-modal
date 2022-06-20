@@ -1,11 +1,11 @@
 export default class CgModal {
   constructor(options) {
     const defaultOptions = {
-      selector: ".js-modal", // Selector of modals [default = .js-modal]
-      openButtonSelector: ".js-open-modal-btn", // Selector of open button [default = .js-open-modal-btn]
-      closeButtonSelector: ".js-close-modal-btn", // Selector of close button [default = .js-close-modal-btn]
-      contentClass: "js-modal-content", // Class of content wrapper [default = js-modal-content]
-      wrapperClass: "js-modal-wrapper", // Class of wrapper [default = js-modal-wrapper]
+      selector: ".modal", // Selector of modals [default = .modal]
+      openButtonSelector: "[data-open-modal]", // Selector of open button [default = [data-open-modal]]
+      closeButtonSelector: ".modal__close-btn", // Selector of close button [default = .close-modal-btn]
+      contentClass: "modal__content", // Class of content wrapper [default = modal-content]
+      wrapperClass: "modal__wrapper", // Class of wrapper [default = modal-wrapper]
       effect: null, // Effect of opening or closing modals (fade, transformBottom, transformLeft, transformTop, transformRight, scaleCenter) [default = null]
       speed: 300, // Transition (ms) [default = 300]
       position: "center", // Position of modal (center, left, right) [default - center]
@@ -44,15 +44,15 @@ export default class CgModal {
 
         // Add tech classes for modal and wrapper, need for correct work for animations effect, positions, etc.
         if (this.options.addTechClasses === true) {
-          !modal.classList.contains("js-modal")
-            ? modal.classList.add("js-modal")
+          !modal.classList.contains("cg-modal")
+            ? modal.classList.add("cg-modal")
             : "";
           !modal
             .querySelector(`.${this.options.wrapperClass}`)
-            .classList.contains("js-modal-wrapper")
+            .classList.contains("cg-modal-wrapper")
             ? modal
                 .querySelector(`.${this.options.wrapperClass}`)
-                .classList.add("js-modal-wrapper")
+                .classList.add("cg-modal-wrapper")
             : "";
         }
 
@@ -81,7 +81,7 @@ export default class CgModal {
     if (openModalButtons) {
       openModalButtons.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-          this.options.on.openBtnClick();
+          this.options.on.openBtnClick.call(this);
 
           e.stopPropagation();
           this.open(`${e.currentTarget.dataset.openModal}`);
@@ -113,8 +113,8 @@ export default class CgModal {
 
       if (modalContent) {
         if (this.options.addTechClasses === true) {
-          !modalContent.classList.contains("js-modal-content")
-            ? modalContent.classList.add("js-modal-content")
+          !modalContent.classList.contains("cg-modal-content")
+            ? modalContent.classList.add("cg-modal-content")
             : "";
         }
 
@@ -146,7 +146,7 @@ export default class CgModal {
 
   // Open modal by data-attribute (data-modal)
   open(modalId) {
-    this.options.on.beforeOpen();
+    this.options.on.beforeOpen.call(this);
 
     const modal = document.querySelector(`[data-modal=${modalId}]`);
 
@@ -154,7 +154,7 @@ export default class CgModal {
       modal.classList.add(`${this._activeClass}`);
       this.documentBody.style.overflow = "hidden";
 
-      this.options.on.afterOpen();
+      this.options.on.afterOpen.call(this);
     } else {
       console.error(
         `Не найдено соответствующее окно с атрибутом равным ${modalId}`
@@ -164,12 +164,12 @@ export default class CgModal {
 
   // Close modal by Node Element
   close(modal) {
-    this.options.on.beforeClose();
+    this.options.on.beforeClose.call(this);
 
     modal.classList.remove(`${this._activeClass}`);
     this.documentBody.style.overflow = "";
 
-    this.options.on.afterClose();
+    this.options.on.afterClose.call(this);
   }
 
   // Close active modal
@@ -193,6 +193,8 @@ export default class CgModal {
   }
 
   deepMerge(target, source) {
+    if (!source) return target;
+
     Object.entries(source).forEach(([key, value]) => {
       if (value && typeof value === "object") {
         this.deepMerge((target[key] = target[key] || {}), value);
@@ -224,6 +226,6 @@ export default class CgModal {
   update() {
     this.init();
 
-    this.options.on.update();
+    this.options.on.update.call(this);
   }
 }

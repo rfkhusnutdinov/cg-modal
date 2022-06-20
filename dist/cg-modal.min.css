@@ -1,1 +1,207 @@
-.js-modal{--speed:0.3s;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-box-align:center;-ms-flex-align:center;-webkit-box-pack:center;-ms-flex-pack:center;align-items:center;background-color:rgba(0,0,0,.8);bottom:0;-webkit-box-sizing:border-box;box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;justify-content:center;left:0;opacity:0;overflow:hidden;position:fixed;right:0;top:0;visibility:hidden;z-index:100}.js-modal.active{opacity:1;visibility:visible}.js-modal-wrapper{-webkit-box-align:start;-ms-flex-align:start;-webkit-box-pack:center;-ms-flex-pack:center;align-items:flex-start;display:-webkit-box;display:-ms-flexbox;display:flex;justify-content:center;overflow:auto;padding:15px}.js-modal-content,.js-modal-wrapper{-webkit-box-sizing:border-box;box-sizing:border-box;width:100%}.js-modal-content{background-color:#fff;max-width:400px;padding:30px}.js-modal.left .js-modal-wrapper{-webkit-box-pack:start;-ms-flex-pack:start;height:100%;justify-content:flex-start;padding:0}.js-modal.left .js-modal-content{min-height:100%}.js-modal.right .js-modal-wrapper{-webkit-box-pack:end;-ms-flex-pack:end;height:100%;justify-content:flex-end;padding:0}.js-modal.right .js-modal-content{min-height:100%}.js-modal.fade,.js-modal.transformBottom{-webkit-transition:opacity var(--speed),visibility var(--speed);-o-transition:opacity var(--speed),visibility var(--speed);transition:opacity var(--speed),visibility var(--speed)}.js-modal.transformBottom .js-modal-content{-webkit-transform:translateY(100vh);-ms-transform:translateY(100vh);transform:translateY(100vh);transition:-webkit-transform var(--speed);-webkit-transition:-webkit-transform var(--speed);-o-transition:transform var(--speed);transition:transform var(--speed);transition:transform var(--speed),-webkit-transform var(--speed)}.js-modal.transformBottom.active .js-modal-content{-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}.js-modal.transformTop{-webkit-transition:opacity var(--speed),visibility var(--speed);-o-transition:opacity var(--speed),visibility var(--speed);transition:opacity var(--speed),visibility var(--speed)}.js-modal.transformTop .js-modal-content{-webkit-transform:translateY(-100vh);-ms-transform:translateY(-100vh);transform:translateY(-100vh);transition:-webkit-transform var(--speed);-webkit-transition:-webkit-transform var(--speed);-o-transition:transform var(--speed);transition:transform var(--speed);transition:transform var(--speed),-webkit-transform var(--speed)}.js-modal.transformTop.active .js-modal-content{-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}.js-modal.transformLeft{-webkit-transition:opacity var(--speed),visibility var(--speed);-o-transition:opacity var(--speed),visibility var(--speed);transition:opacity var(--speed),visibility var(--speed)}.js-modal.transformLeft .js-modal-content{-webkit-transform:translateX(-100vw);-ms-transform:translateX(-100vw);transform:translateX(-100vw);transition:-webkit-transform var(--speed);-webkit-transition:-webkit-transform var(--speed);-o-transition:transform var(--speed);transition:transform var(--speed);transition:transform var(--speed),-webkit-transform var(--speed)}.js-modal.transformLeft.active .js-modal-content{-webkit-transform:translateX(0);-ms-transform:translateX(0);transform:translateX(0)}.js-modal.transformRight{-webkit-transition:opacity var(--speed),visibility var(--speed);-o-transition:opacity var(--speed),visibility var(--speed);transition:opacity var(--speed),visibility var(--speed)}.js-modal.transformRight .js-modal-content{-webkit-transform:translateX(100vw);-ms-transform:translateX(100vw);transform:translateX(100vw);transition:-webkit-transform var(--speed);-webkit-transition:-webkit-transform var(--speed);-o-transition:transform var(--speed);transition:transform var(--speed);transition:transform var(--speed),-webkit-transform var(--speed)}.js-modal.transformRight.active .js-modal-content{-webkit-transform:translateX(0);-ms-transform:translateX(0);transform:translateX(0)}.js-modal.scaleCenter{-webkit-transition:opacity var(--speed),visibility var(--speed);-o-transition:opacity var(--speed),visibility var(--speed);transition:opacity var(--speed),visibility var(--speed)}.js-modal.scaleCenter .js-modal-content{-webkit-transform:scale(0);-ms-transform:scale(0);transform:scale(0);transition:-webkit-transform var(--speed);-webkit-transition:-webkit-transform var(--speed);-o-transition:transform var(--speed);transition:transform var(--speed);transition:transform var(--speed),-webkit-transform var(--speed)}.js-modal.scaleCenter.active .js-modal-content{-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1)}
+/*!******************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/cg-modal.css ***!
+  \******************************************************************************************************************************************/
+/* Main */
+.cg-modal {
+  --speed: 0.3s;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 80%);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.cg-modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cg-modal-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px;
+  overflow: auto;
+}
+
+.cg-modal-content {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  background-color: #fff;
+}
+
+.cg-modal.left .cg-modal-wrapper {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 0;
+}
+
+.cg-modal.left .cg-modal-content {
+  min-height: 100%;
+}
+
+.cg-modal.right .cg-modal-wrapper {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 0;
+}
+
+.cg-modal.right .cg-modal-content {
+  min-height: 100%;
+}
+
+/* Effects */
+.cg-modal.fade,
+.cg-modal.transformBottom {
+  -webkit-transition: opacity var(--speed), visibility var(--speed);
+  -o-transition: opacity var(--speed), visibility var(--speed);
+  transition: opacity var(--speed), visibility var(--speed);
+}
+
+.cg-modal.transformBottom .cg-modal-content {
+  -webkit-transform: translateY(100vh);
+  -ms-transform: translateY(100vh);
+  transform: translateY(100vh);
+  transition: -webkit-transform var(--speed);
+  -webkit-transition: -webkit-transform var(--speed);
+  -o-transition: transform var(--speed);
+  transition: transform var(--speed);
+  transition: transform var(--speed), -webkit-transform var(--speed);
+}
+
+.cg-modal.transformBottom.active .cg-modal-content {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.cg-modal.transformTop {
+  -webkit-transition: opacity var(--speed), visibility var(--speed);
+  -o-transition: opacity var(--speed), visibility var(--speed);
+  transition: opacity var(--speed), visibility var(--speed);
+}
+
+.cg-modal.transformTop .cg-modal-content {
+  -webkit-transform: translateY(-100vh);
+  -ms-transform: translateY(-100vh);
+  transform: translateY(-100vh);
+  transition: -webkit-transform var(--speed);
+  -webkit-transition: -webkit-transform var(--speed);
+  -o-transition: transform var(--speed);
+  transition: transform var(--speed);
+  transition: transform var(--speed), -webkit-transform var(--speed);
+}
+
+.cg-modal.transformTop.active .cg-modal-content {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.cg-modal.transformLeft {
+  -webkit-transition: opacity var(--speed), visibility var(--speed);
+  -o-transition: opacity var(--speed), visibility var(--speed);
+  transition: opacity var(--speed), visibility var(--speed);
+}
+
+.cg-modal.transformLeft .cg-modal-content {
+  -webkit-transform: translateX(-100vw);
+  -ms-transform: translateX(-100vw);
+  transform: translateX(-100vw);
+  transition: -webkit-transform var(--speed);
+  -webkit-transition: -webkit-transform var(--speed);
+  -o-transition: transform var(--speed);
+  transition: transform var(--speed);
+  transition: transform var(--speed), -webkit-transform var(--speed);
+}
+
+.cg-modal.transformLeft.active .cg-modal-content {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.cg-modal.transformRight {
+  -webkit-transition: opacity var(--speed), visibility var(--speed);
+  -o-transition: opacity var(--speed), visibility var(--speed);
+  transition: opacity var(--speed), visibility var(--speed);
+}
+
+.cg-modal.transformRight .cg-modal-content {
+  -webkit-transform: translateX(100vw);
+  -ms-transform: translateX(100vw);
+  transform: translateX(100vw);
+  transition: -webkit-transform var(--speed);
+  -webkit-transition: -webkit-transform var(--speed);
+  -o-transition: transform var(--speed);
+  transition: transform var(--speed);
+  transition: transform var(--speed), -webkit-transform var(--speed);
+}
+
+.cg-modal.transformRight.active .cg-modal-content {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  transform: translateX(0);
+}
+
+.cg-modal.scaleCenter {
+  -webkit-transition: opacity var(--speed), visibility var(--speed);
+  -o-transition: opacity var(--speed), visibility var(--speed);
+  transition: opacity var(--speed), visibility var(--speed);
+}
+
+.cg-modal.scaleCenter .cg-modal-content {
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  transition: -webkit-transform var(--speed);
+  -webkit-transition: -webkit-transform var(--speed);
+  -o-transition: transform var(--speed);
+  transition: transform var(--speed);
+  transition: transform var(--speed), -webkit-transform var(--speed);
+}
+
+.cg-modal.scaleCenter.active .cg-modal-content {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+

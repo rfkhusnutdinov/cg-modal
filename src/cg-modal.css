@@ -1,5 +1,5 @@
 /* Main */
-.js-modal {
+.cg-modal {
   --speed: 0.3s;
 
   position: fixed;
@@ -19,12 +19,12 @@
   opacity: 0;
 }
 
-.js-modal.active {
+.cg-modal.active {
   visibility: visible;
   opacity: 1;
 }
 
-.js-modal-wrapper {
+.cg-modal-wrapper {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -34,7 +34,7 @@
   overflow: auto;
 }
 
-.js-modal-content {
+.cg-modal-content {
   box-sizing: border-box;
   width: 100%;
   max-width: 400px;
@@ -42,100 +42,100 @@
   background-color: #fff;
 }
 
-.js-modal.left .js-modal-wrapper {
+.cg-modal.left .cg-modal-wrapper {
   justify-content: flex-start;
   height: 100%;
   padding: 0;
 }
 
-.js-modal.left .js-modal-content {
+.cg-modal.left .cg-modal-content {
   min-height: 100%;
 }
 
-.js-modal.right .js-modal-wrapper {
+.cg-modal.right .cg-modal-wrapper {
   justify-content: flex-end;
   height: 100%;
   padding: 0;
 }
 
-.js-modal.right .js-modal-content {
+.cg-modal.right .cg-modal-content {
   min-height: 100%;
 }
 
 /* Effects */
-.js-modal.fade,
-.js-modal.transformBottom {
+.cg-modal.fade,
+.cg-modal.transformBottom {
   transition: opacity var(--speed), visibility var(--speed);
 }
 
-.js-modal.transformBottom .js-modal-content {
+.cg-modal.transformBottom .cg-modal-content {
   transform: translateY(100vh);
   transition: -webkit-transform var(--speed);
   transition: transform var(--speed);
   transition: transform var(--speed), -webkit-transform var(--speed);
 }
 
-.js-modal.transformBottom.active .js-modal-content {
+.cg-modal.transformBottom.active .cg-modal-content {
   transform: translateY(0);
 }
 
-.js-modal.transformTop {
+.cg-modal.transformTop {
   transition: opacity var(--speed), visibility var(--speed);
 }
 
-.js-modal.transformTop .js-modal-content {
+.cg-modal.transformTop .cg-modal-content {
   transform: translateY(-100vh);
   transition: -webkit-transform var(--speed);
   transition: transform var(--speed);
   transition: transform var(--speed), -webkit-transform var(--speed);
 }
 
-.js-modal.transformTop.active .js-modal-content {
+.cg-modal.transformTop.active .cg-modal-content {
   transform: translateY(0);
 }
 
-.js-modal.transformLeft {
+.cg-modal.transformLeft {
   transition: opacity var(--speed), visibility var(--speed);
 }
 
-.js-modal.transformLeft .js-modal-content {
+.cg-modal.transformLeft .cg-modal-content {
   transform: translateX(-100vw);
   transition: -webkit-transform var(--speed);
   transition: transform var(--speed);
   transition: transform var(--speed), -webkit-transform var(--speed);
 }
 
-.js-modal.transformLeft.active .js-modal-content {
+.cg-modal.transformLeft.active .cg-modal-content {
   transform: translateX(0);
 }
 
-.js-modal.transformRight {
+.cg-modal.transformRight {
   transition: opacity var(--speed), visibility var(--speed);
 }
 
-.js-modal.transformRight .js-modal-content {
+.cg-modal.transformRight .cg-modal-content {
   transform: translateX(100vw);
   transition: -webkit-transform var(--speed);
   transition: transform var(--speed);
   transition: transform var(--speed), -webkit-transform var(--speed);
 }
 
-.js-modal.transformRight.active .js-modal-content {
+.cg-modal.transformRight.active .cg-modal-content {
   transform: translateX(0);
   transform: translateX(0);
 }
 
-.js-modal.scaleCenter {
+.cg-modal.scaleCenter {
   transition: opacity var(--speed), visibility var(--speed);
 }
 
-.js-modal.scaleCenter .js-modal-content {
+.cg-modal.scaleCenter .cg-modal-content {
   transform: scale(0);
   transition: -webkit-transform var(--speed);
   transition: transform var(--speed);
   transition: transform var(--speed), -webkit-transform var(--speed);
 }
 
-.js-modal.scaleCenter.active .js-modal-content {
+.cg-modal.scaleCenter.active .cg-modal-content {
   transform: scale(1);
 }
