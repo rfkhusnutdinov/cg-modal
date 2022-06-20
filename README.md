@@ -58,22 +58,22 @@ const modals = new CgModal({
 
 ### Parameters
 
-**selector** - type: string - default: ".modal" - string of modal window HTML element
-**openButtonSelector** - type: string - default: "[data-open-modal]" - string of open modal button HTML element
-**closeButtonSelector** - type: string - default: ".modal**close-btn" - string of close modal button HTML element
-**wrapperClass** - type: string - default: "modal**wrapper"
-**contentClass** - type: string - default: "modal\_\_content"
-**effect** - type: null | string - defautl: null
-**speed** - type: number - default: 300
-**position** - type: string - default: "center"
-**addTechClasses** - type: boolean - default: true
+- **selector** - <code>type: string</code> - default: ".modal" - string of modal window HTML element
+- **openButtonSelector** - <code>type: string</code> - default: "[data-open-modal]" - string of open modal button HTML element
+- **closeButtonSelector** - <code>type: string</code> - default: ".modal\*\*close-btn" - string of close modal button HTML element
+- **wrapperClass** - <code>type: string</code> - default: "modal\*\*wrapper"
+- **contentClass** - <code>type: string</code> - default: "modal\_\_content"
+- **effect** - <code>type: null | string</code> - defautl: null
+- **speed** - <code>type: number</code> - default: 300
+- **position** - <code>type: string</code> - default: "center"
+- **addTechClasses** - <code>type: boolean</code> - default: true
 
 ### Methods
 
-**open(modalData)** - open modal by data-attribute (data-modal)
-**close(modal)** - close modal by Node Element
-**closeActive()** - close active modal
-**update()** - update instance
+- **open(modalData)** - open modal by data-attribute (data-modal)
+- **close(modal)** - close modal by Node Element
+- **closeActive()** - close active modal
+- **update()** - update instance
 
 ### Events
 
@@ -92,12 +92,12 @@ const modals = new CgModal({
 
 #### List of events:
 
-**beforeOpen** - Event before open modal
-**afterOpen** - Event after open modal
-**beforeClose** - Event before close modal
-**afterClose** - Event after close modal
-**openBtnClick** - Event at moment of click on open button
-**update** - Event at moment of update instance
+- **beforeOpen** - Event before open modal
+- **afterOpen** - Event after open modal
+- **beforeClose** - Event before close modal
+- **afterClose** - Event after close modal
+- **openBtnClick** - Event at moment of click on open button
+- **update** - Event at moment of update instance
 
 ## License
 
