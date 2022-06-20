@@ -32,7 +32,9 @@ export default class CgModal {
     this.modals = document.querySelectorAll(`${this.options.selector}`);
 
     if (!this.modals) {
-      console.error(`Не найден элемент с селектором "${this.options.selector}"`);
+      console.error(
+        `Не найден элемент с селектором "${this.options.selector}"`
+      );
     } else {
       this.modals.forEach((modal) => {
         // Add class of effect
@@ -42,9 +44,15 @@ export default class CgModal {
 
         // Add tech classes for modal and wrapper, need for correct work for animations effect, positions, etc.
         if (this.options.addTechClasses === true) {
-          !modal.classList.contains("js-modal") ? modal.classList.add("js-modal") : "";
-          !modal.querySelector(`.${this.options.wrapperClass}`).classList.contains("js-modal-wrapper")
-            ? modal.querySelector(`.${this.options.wrapperClass}`).classList.add("js-modal-wrapper")
+          !modal.classList.contains("js-modal")
+            ? modal.classList.add("js-modal")
+            : "";
+          !modal
+            .querySelector(`.${this.options.wrapperClass}`)
+            .classList.contains("js-modal-wrapper")
+            ? modal
+                .querySelector(`.${this.options.wrapperClass}`)
+                .classList.add("js-modal-wrapper")
             : "";
         }
 
@@ -53,7 +61,10 @@ export default class CgModal {
 
         // Set speed of animations
         if (this.options.speed && this._isNumeric(this.options.speed)) {
-          modal.style.setProperty("--speed", parseFloat(this.options.speed / 1000) + "s");
+          modal.style.setProperty(
+            "--speed",
+            parseFloat(this.options.speed / 1000) + "s"
+          );
         }
       });
 
@@ -63,7 +74,9 @@ export default class CgModal {
 
   _eventsHandler() {
     // Click event for open modal buttons
-    const openModalButtons = document.querySelectorAll(`${this.options.openButtonSelector}`);
+    const openModalButtons = document.querySelectorAll(
+      `${this.options.openButtonSelector}`
+    );
 
     if (openModalButtons) {
       openModalButtons.forEach((btn) => {
@@ -75,12 +88,16 @@ export default class CgModal {
         });
       });
     } else {
-      console.error(`Не найден элемент с селектором "${this.options.openButtonSelector}"`);
+      console.error(
+        `Не найден элемент с селектором "${this.options.openButtonSelector}"`
+      );
     }
 
     this.modals.forEach((modal) => {
       // Click event for close modal button
-      const closeModalButtons = modal.querySelectorAll(`${this.options.closeButtonSelector}`);
+      const closeModalButtons = modal.querySelectorAll(
+        `${this.options.closeButtonSelector}`
+      );
 
       if (closeModalButtons) {
         closeModalButtons.forEach((btn) => {
@@ -96,7 +113,9 @@ export default class CgModal {
 
       if (modalContent) {
         if (this.options.addTechClasses === true) {
-          !modalContent.classList.contains("js-modal-content") ? modalContent.classList.add("js-modal-content") : "";
+          !modalContent.classList.contains("js-modal-content")
+            ? modalContent.classList.add("js-modal-content")
+            : "";
         }
 
         modalContent.addEventListener("click", (e) => {
@@ -137,7 +156,9 @@ export default class CgModal {
 
       this.options.on.afterOpen();
     } else {
-      console.error(`Не найдено соответствующее окно с атрибутом равным ${modalId}`);
+      console.error(
+        `Не найдено соответствующее окно с атрибутом равным ${modalId}`
+      );
     }
   }
 
@@ -159,7 +180,9 @@ export default class CgModal {
 
   // Check if there is active modal window
   hasActiveModal() {
-    return document.querySelector(`${this.options.selector}.${this._activeClass}`)
+    return document.querySelector(
+      `${this.options.selector}.${this._activeClass}`
+    )
       ? document.querySelector(`${this.options.selector}.${this._activeClass}`)
       : false;
   }
@@ -182,7 +205,14 @@ export default class CgModal {
 
   // Check if options have correct effect property
   hasEffect(string) {
-    const effects = ["fade", "transformLeft", "transformRight", "transformTop", "transformBottom", "scaleCenter"];
+    const effects = [
+      "fade",
+      "transformLeft",
+      "transformRight",
+      "transformTop",
+      "transformBottom",
+      "scaleCenter",
+    ];
 
     if (string && effects.indexOf(string.toString().trim()) != -1) {
       return true;

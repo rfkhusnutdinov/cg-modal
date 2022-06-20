@@ -34,6 +34,10 @@
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.0.0",
     "style-loader": "^3.3.1",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard-scss": "^4.0.0",
+    "stylelint-order": "^5.0.0",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0"
   }
