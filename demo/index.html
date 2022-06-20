@@ -5,17 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CgModal</title>
+  <title>cg-modal</title>
   <link rel="stylesheet" href="../dist/cg-modal.min.css">
   <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-  <button class="js-open-modal-btn" type="button" data-open-modal="new">Open</button>
+  <button class="js-open-modal-btn" type="button" data-open-modal="new">Open modal window</button>
 
-  <div class="js-modal" data-modal="new">
-    <div class="js-modal-wrapper">
-      <div class="js-modal-content">
+  <div class="modal" data-modal="new">
+    <div class="modal__wrapper">
+      <div class="modal__content">
         <button class="js-close-modal-btn" type="button" aria-label="Закрыть модальное окно">Закрыть</button>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium tenetur ab consequatur iusto assumenda
           doloribus optio quasi accusamus, placeat, dolorum dolore. Officiis aperiam possimus dolore qui obcaecati
@@ -30,7 +30,19 @@
   </div>
   <script src="../dist/cg-modal.min.js"></script>
   <script>
-    const modals = new CgModal();
+    const modals = new CgModal({
+      effect: "scaleCenter",
+      speed: 700,
+      selector: ".modal",
+      contentClass: "modal__content",
+      wrapperClass: "modal__wrapper",
+      on: {
+        beforeOpen: function (this) {
+        },
+        openBtnClick: function () {
+        }
+      }
+    });
   </script>
 </body>
 

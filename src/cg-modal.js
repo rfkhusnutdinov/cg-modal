@@ -1,27 +1,29 @@
 export default class CgModal {
   constructor(options) {
-    const deafultOptions = {
+    const defaultOptions = {
       selector: ".js-modal", // Selector of modals [default = .js-modal]
-      openButton: ".js-open-modal-btn", // Selector of open button [default = .js-open-modal-btn]
-      closeButton: ".js-close-modal-btn", // Selector of close button [default = .js-close-modal-btn]
+      openButtonSelector: ".js-open-modal-btn", // Selector of open button [default = .js-open-modal-btn]
+      closeButtonSelector: ".js-close-modal-btn", // Selector of close button [default = .js-close-modal-btn]
       contentClass: "js-modal-content", // Class of content wrapper [default = js-modal-content]
+      wrapperClass: "js-modal-wrapper", // Class of wrapper [default = js-modal-wrapper]
       effect: null, // Effect of opening or closing modals (fade, transformBottom, transformLeft, transformTop, transformRight, scaleCenter) [default = null]
       speed: 300, // Transition (ms) [default = 300]
       position: "center", // Position of modal (center, left, right) [default - center]
+      addTechClasses: true,
       on: {
-        beforeOpen: () => {}, // Event before open modal
-        afterOpen: () => {}, // Event after open modal
-        beforeClose: () => {}, // Event before close modal
-        afterClose: () => {}, // Event after close modal
-        openBtnClick: () => {}, // Event at moment of click on open button
-        update: () => {}, // Event at moment of update instance
+        beforeOpen: function () {}, // Event before open modal
+        afterOpen: function () {}, // Event after open modal
+        beforeClose: function () {}, // Event before close modal
+        afterClose: function () {}, // Event after close modal
+        openBtnClick: function () {}, // Event at moment of click on open button
+        update: function () {}, // Event at moment of update instance
       },
     };
 
     this._activeClass = "active";
-    this.options = Object.assign(deafultOptions, options);
     this.modals = null;
     this.documentBody = document.body;
+    this.options = this.deepMerge(defaultOptions, options);
 
     this.init();
   }
@@ -38,8 +40,13 @@ export default class CgModal {
           modal.classList.add(`${this.options.effect}`);
         }
 
-        // Add tech class for modal, need for correct work for animations effect, positions, etc.
-        !modal.classList.contains("js-modal") ? modal.classList.add("js-modal") : "";
+        // Add tech classes for modal and wrapper, need for correct work for animations effect, positions, etc.
+        if (this.options.addTechClasses === true) {
+          !modal.classList.contains("js-modal") ? modal.classList.add("js-modal") : "";
+          !modal.querySelector(`.${this.options.wrapperClass}`).classList.contains("js-modal-wrapper")
+            ? modal.querySelector(`.${this.options.wrapperClass}`).classList.add("js-modal-wrapper")
+            : "";
+        }
 
         // Add class of modal position
         modal.classList.add(`${this.options.position}`);
@@ -56,7 +63,7 @@ export default class CgModal {
 
   _eventsHandler() {
     // Click event for open modal buttons
-    const openModalButtons = document.querySelectorAll(`${this.options.openButton}`);
+    const openModalButtons = document.querySelectorAll(`${this.options.openButtonSelector}`);
 
     if (openModalButtons) {
       openModalButtons.forEach((btn) => {
@@ -68,12 +75,12 @@ export default class CgModal {
         });
       });
     } else {
-      console.error(`Не найден элемент с селектором "${this.options.openButton}"`);
+      console.error(`Не найден элемент с селектором "${this.options.openButtonSelector}"`);
     }
 
     this.modals.forEach((modal) => {
       // Click event for close modal button
-      const closeModalButtons = modal.querySelectorAll(`${this.options.closeButton}`);
+      const closeModalButtons = modal.querySelectorAll(`${this.options.closeButtonSelector}`);
 
       if (closeModalButtons) {
         closeModalButtons.forEach((btn) => {
@@ -88,7 +95,9 @@ export default class CgModal {
       const modalContent = modal.querySelector(`.${this.options.contentClass}`);
 
       if (modalContent) {
-        !modalContent.classList.contains("js-modal-content") ? modalContent.classList.add("js-modal-content") : "";
+        if (this.options.addTechClasses === true) {
+          !modalContent.classList.contains("js-modal-content") ? modalContent.classList.add("js-modal-content") : "";
+        }
 
         modalContent.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -158,6 +167,17 @@ export default class CgModal {
   // function helper - check if property is number
   _isNumeric(number) {
     return !isNaN(parseFloat(number)) && isFinite(number);
+  }
+
+  deepMerge(target, source) {
+    Object.entries(source).forEach(([key, value]) => {
+      if (value && typeof value === "object") {
+        this.deepMerge((target[key] = target[key] || {}), value);
+        return;
+      }
+      target[key] = value;
+    });
+    return target;
   }
 
   // Check if options have correct effect property

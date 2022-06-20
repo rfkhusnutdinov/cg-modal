@@ -5,6 +5,7 @@
 }
 
 .js-open-modal-btn {
+  margin: 15px;
   width: 200px;
   margin-left: auto;
   margin-right: auto;
@@ -16,5 +17,31 @@
   justify-content: center;
   padding: 8px 10px;
   cursor: pointer;
-  border-radius: 5px;
+  background-color: #ddd;
+  border-radius: 3px;
+  border: none;
+  margin-left: auto;
+  transition: background-color 0.3s linear;
+}
+
+.js-close-modal-btn {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 300;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin-bottom: 15px;
+  cursor: pointer;
+  background-color: #ddd;
+  border-radius: 3px;
+  margin-left: auto;
+  transition: background-color 0.3s linear;
+}
+
+.js-close-modal-btn:hover,
+.js-open-modal-btn:hover {
+  background-color: #aaa;
 }
