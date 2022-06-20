@@ -60,8 +60,8 @@ const modals = new CgModal({
 
 - **selector** - <code>type: string</code> - default: ".modal" - string of modal window HTML element
 - **openButtonSelector** - <code>type: string</code> - default: "[data-open-modal]" - string of open modal button HTML element
-- **closeButtonSelector** - <code>type: string</code> - default: ".modal\*\*close-btn" - string of close modal button HTML element
-- **wrapperClass** - <code>type: string</code> - default: "modal\*\*wrapper"
+- **closeButtonSelector** - <code>type: string</code> - default: ".modal\_\_close-btn" - string of close modal button HTML element
+- **wrapperClass** - <code>type: string</code> - default: "modal\_\_wrapper"
 - **contentClass** - <code>type: string</code> - default: "modal\_\_content"
 - **effect** - <code>type: null | string</code> - defautl: null
 - **speed** - <code>type: number</code> - default: 300
