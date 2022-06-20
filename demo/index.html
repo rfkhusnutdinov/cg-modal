@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>cg-modal</title>
+  <title>CgModal</title>
   <link rel="stylesheet" href="../dist/cg-modal.min.css">
   <link rel="stylesheet" href="./style.css">
 </head>
@@ -16,7 +16,7 @@
   <div class="modal" data-modal="new">
     <div class="modal__wrapper">
       <div class="modal__content">
-        <button class="js-close-modal-btn" type="button" aria-label="Закрыть модальное окно">Закрыть</button>
+        <button class="modal__close-btn" type="button">Close</button>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium tenetur ab consequatur iusto assumenda
           doloribus optio quasi accusamus, placeat, dolorum dolore. Officiis aperiam possimus dolore qui obcaecati
           provident, quibusdam nisi commodi ullam, dicta nam quaerat veritatis iusto ab earum tempore enim, sunt magnam
@@ -31,17 +31,8 @@
   <script src="../dist/cg-modal.min.js"></script>
   <script>
     const modals = new CgModal({
-      effect: "scaleCenter",
-      speed: 700,
-      selector: ".modal",
-      contentClass: "modal__content",
-      wrapperClass: "modal__wrapper",
-      on: {
-        beforeOpen: function () {
-        },
-        openBtnClick: function () {
-        }
-      }
+      effect: "fade",
+      speed: 500
     });
   </script>
 </body>

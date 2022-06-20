@@ -22,7 +22,7 @@
   transition: background-color 0.3s linear;
 }
 
-.js-close-modal-btn {
+.modal__close-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +39,7 @@
   transition: background-color 0.3s linear;
 }
 
-.js-close-modal-btn:hover,
+.modal__close-btn:hover,
 .js-open-modal-btn:hover {
   background-color: #aaa;
 }
