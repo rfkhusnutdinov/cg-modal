@@ -1,6 +1,6 @@
 {
   "name": "cg-modal",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple JS library for modal windows",
   "main": "index.js",
   "scripts": {
