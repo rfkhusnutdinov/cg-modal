@@ -1,12 +1,13 @@
 # CgModal
 
 CgModal - is simple and lightweight JS plugin of displaying modal windows which does not depend on jQuery or others.
+
 For examples and demos, see [link](https://rfkhusnutdinov.github.io/cg-modal/demo)
 
 ## Installation
 
-- **Via npm** <code>npm install --save cg-modal</code>
-- **Via script tag** (change <code>@latest</code> to latest version)
+- **Via npm** `npm install --save cg-modal`
+- **Via script tag** (change `@latest` to latest version)
 
 ```html
 <link
@@ -34,7 +35,11 @@ import "cg-modal/dist/cg-modal.css";
 Append to document following HTML:
 
 ```html
-<div class="modal" data-modal="{unique name for modal}">
+<!-- HTML of open modal button -->
+<button type="button" data-open-modal="modal">Button</button>
+
+<!-- HTML of modal window -->
+<div class="modal" data-modal="modal">
   <div class="modal__wrapper">
     <div class="modal__content">
       <button class="modal__close-btn" type="button">Close</button>
@@ -58,15 +63,17 @@ const modals = new CgModal({
 
 ### Parameters
 
-- **selector** - <code>type: string</code> - default: ".modal" - string of modal window HTML element
-- **openButtonSelector** - <code>type: string</code> - default: "[data-open-modal]" - string of open modal button HTML element
-- **closeButtonSelector** - <code>type: string</code> - default: ".modal\_\_close-btn" - string of close modal button HTML element
-- **wrapperClass** - <code>type: string</code> - default: "modal\_\_wrapper"
-- **contentClass** - <code>type: string</code> - default: "modal\_\_content"
-- **effect** - <code>type: null | string</code> - defautl: null
-- **speed** - <code>type: number</code> - default: 300
-- **position** - <code>type: string</code> - default: "center"
-- **addTechClasses** - <code>type: boolean</code> - default: true
+| Name                    | Type      | Default               | Description                                                                                                                                                                                                                                                          |
+| ----------------------- | --------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **selector**            | `string`  | `.modal`              | Selector HTML element that will act as a modal window                                                                                                                                                                                                                |
+| **openButtonSelector**  | `string`  | `[data-open-modal]`   | Selector HTML element that will act as the button that opens the modal window                                                                                                                                                                                        |
+| **closeButtonSelector** | `string`  | `.modal\_\_close-btn` | The HTML element selector that will act as the modal's close button. Should be inside this window.                                                                                                                                                                   |
+| **wrapperClass**        | `string`  | `modal\_\_wrapper`    | Class of wrapper container inside modal                                                                                                                                                                                                                              |
+| **contentClass**        | `string`  | `modal\_\_content`    | Class of content part of modal window                                                                                                                                                                                                                                |
+| **effect**              | `null     | string`\|`null`       | Modal open and close effect. There are following effects: `"fade" \| "scaleCenter" \| "transformLeft" \| "transformBottom" \| "transformRight" \|"transformTop"`                                                                                                     |
+| **speed**               | `number`  | `300`                 | Modal opening and closing animation speed                                                                                                                                                                                                                            |
+| **position**            | `string`  | `center`              | Modal position on screen. There are following values: `"center" \| "left" \| "right"`                                                                                                                                                                                |
+| **addTechClasses**      | `boolean` | `true`                | Adding technical classes for the main elements of the modal window so that the default styles work. If the value is false, then you need to write all the styles for the modal window yourself. Classes such as `"cg-modal", "cg-modal-wrapper", "cg-modal-content"` |
 
 ### Methods
 
@@ -77,7 +84,7 @@ const modals = new CgModal({
 
 ### Events
 
-You can listen different useful events. Using <code>on</code> parameter on initialization
+You can listen different useful events. Using `on` parameter on initialization
 
 ```javascript
 const modals = new CgModal({

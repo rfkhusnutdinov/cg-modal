@@ -32,9 +32,7 @@ export default class CgModal {
     this.modals = document.querySelectorAll(`${this.options.selector}`);
 
     if (!this.modals) {
-      console.error(
-        `Не найден элемент с селектором "${this.options.selector}"`
-      );
+      console.error(`Element "${this.options.selector}" not found`);
     } else {
       this.modals.forEach((modal) => {
         // Add class of effect
@@ -42,7 +40,7 @@ export default class CgModal {
           modal.classList.add(`${this.options.effect}`);
         }
 
-        // Add tech classes for modal and wrapper, need for correct work for animations effect, positions, etc.
+        // Add tech classes for modal and wrapper, need for correct work for default plugin styles.
         if (this.options.addTechClasses === true) {
           !modal.classList.contains("cg-modal")
             ? modal.classList.add("cg-modal")
