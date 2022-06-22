@@ -7,7 +7,7 @@ For examples and demos, see [link](https://rfkhusnutdinov.github.io/cg-modal/dem
 ## Installation
 
 - **Via npm** `npm install --save cg-modal`
-- **Via script tag** (change `@latest` to latest version)
+- **Via script tag** (change `@latest` to latest version `ex: @1.0.1`)
 
 ```html
 <link
@@ -28,8 +28,10 @@ For examples and demos, see [link](https://rfkhusnutdinov.github.io/cg-modal/dem
 If you are using **import/export syntax**, you need to import library:
 
 ```javascript
-import CgModal from "cg-modal";
-import "cg-modal/dist/cg-modal.css";
+import "cg-modal";
+// or
+import "cg-modal/dist/cg-modal.min.js";
+import "cg-modal/dist/cg-modal.min.css";
 ```
 
 Append to document following HTML:
